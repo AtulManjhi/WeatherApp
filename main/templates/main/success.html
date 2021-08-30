@@ -1,0 +1,870 @@
+{% extends 'main/base.html' %}
+
+{% block body %}
+<div class="card1">
+    <div class="col1">
+        <p class="city">{{ city_weather.city }}, {{ city_weather.country }}</p>
+        <p class="date"> As of {{ time_now }} (local time)</p>
+
+        <div>
+            <p class="temp">{{ city_weather.temperature }}<sup>o</sup></p>
+        </div>
+        <div class="feelsLike">
+            <p>Feels like {{ city_weather.feels_like }}<sup>o</sup> C</p>
+        </div>
+    </div>
+
+    <div class="col2">
+        <div class="icon">
+            <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" />
+        </div>
+        <div class="desc">
+            {{ city_weather.description|lower|capfirst }}
+        </div>
+        <div class="max_min">
+            {{ city_weather.max_temp }}<sup>o</sup> / {{ city_weather.min_temp }}<sup>o</sup>
+        </div>
+    </div>
+</div>
+
+<!-- Daily Forecast -->
+
+<div class="card2">
+    <div class="sec1">
+        <p class="dailyHead">Daily Forecast</p>
+    </div>
+    <div class="sec4">
+        <a class="dailycard" onclick="openToday()" href="#today_card">
+            <table>
+                <tr>
+                    <td>Today</td>
+                </tr>
+                <tr>
+                    <td><span class="iconify" data-icon="carbon:temperature-max" data-width="20"
+                            data-height="20"></span> {{ city_weather.max_temp }}<sup>o</sup></td>
+                </tr>
+                <tr>
+                    <td><span class="iconify" data-icon="carbon:temperature-min" data-width="20"
+                            data-height="20"></span> {{ city_weather.min_temp }}<sup>o</sup></td>
+                </tr>
+                <tr>
+                    <td><img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" /></td>
+                </tr>
+                <tr>
+                    <td>{{ city_weather.main }}</td>
+                </tr>
+            </table>
+        </a>
+        <a class="dailycard" onclick="openTomorrow()" href="#tomorrow_card">
+            <table>
+                <tr>
+                    <td>{{ forecast1.time }}</td>
+                </tr>
+                <tr>
+                    <td><span class="iconify" data-icon="carbon:temperature-max" data-width="20"
+                            data-height="20"></span> {{ forecast1.max }}<sup>o</sup></td>
+                </tr>
+                <tr>
+                    <td><span class="iconify" data-icon="carbon:temperature-min" data-width="20"
+                            data-height="20"></span> {{ forecast1.min }}<sup>o</sup></td>
+                </tr>
+                <tr>
+                    <td><img src="http://openweathermap.org/img/w/{{ forecast1.icon }}.png" /></td>
+                </tr>
+                <tr>
+                    <td>{{ forecast1.main }}</td>
+                </tr>
+            </table>
+        </a>
+        <a class="dailycard" onclick="openDay3()" href="#day3_card">
+            <table>
+                <tr>
+                    <td>{{ forecast2.time }}</td>
+                </tr>
+                <tr>
+                    <td><span class="iconify" data-icon="carbon:temperature-max" data-width="20"
+                            data-height="20"></span> {{ forecast2.max }}<sup>o</sup></td>
+                </tr>
+                <tr>
+                    <td><span class="iconify" data-icon="carbon:temperature-min" data-width="20"
+                            data-height="20"></span> {{ forecast2.min }}<sup>o</sup></td>
+                </tr>
+                <tr>
+                    <td><img src="http://openweathermap.org/img/w/{{ forecast2.icon }}.png" /></td>
+                </tr>
+                <tr>
+                    <td>{{ forecast2.main }}</td>
+                </tr>
+            </table>
+        </a>
+        <a class="dailycard" onclick="openDay4()" href="#day4_card">
+            <table>
+                <tr>
+                    <td>{{ forecast3.time }}</td>
+                </tr>
+                <tr>
+                    <td><span class="iconify" data-icon="carbon:temperature-max" data-width="20"
+                            data-height="20"></span> {{ forecast3.max }}<sup>o</sup></td>
+                </tr>
+                <tr>
+                    <td><span class="iconify" data-icon="carbon:temperature-min" data-width="20"
+                            data-height="20"></span> {{ forecast3.min }}<sup>o</sup></td>
+                </tr>
+                <tr>
+                    <td><img src="http://openweathermap.org/img/w/{{ forecast3.icon }}.png" /></td>
+                </tr>
+                <tr>
+                    <td> {{ forecast3.main }}</td>
+                </tr>
+            </table>
+        </a>
+        <a class="dailycard" onclick="openDay5()" href="#day5_card">
+            <table>
+                <tr>
+                    <td>{{ forecast4.time }}</td>
+                </tr>
+                <tr>
+                    <td><span class="iconify" data-icon="carbon:temperature-max" data-width="20"
+                            data-height="20"></span> {{ forecast4.max }}<sup>o</sup></td>
+                </tr>
+                <tr>
+                    <td><span class="iconify" data-icon="carbon:temperature-min" data-width="20"
+                            data-height="20"></span> {{ forecast4.min }}<sup>o</sup></td>
+                </tr>
+                <tr>
+                    <td><img src="http://openweathermap.org/img/w/{{ forecast4.icon }}.png" /></td>
+                </tr>
+                <tr>
+                    <td>{{ forecast4.main }}</td>
+                </tr>
+            </table>
+        </a>
+    </div>
+</div>
+
+
+<div class="card2">
+
+    <p class="fiveDay_head">5-day Weather - {{ city_weather.city }}, {{ city_weather.country }}</p> 
+    <p class="fiveDay_time">As of {{ time_now }} </p>
+
+    <a class="collapsible" onclick="showToday()" href="#today_card">
+        <div class="list" id="today_card">
+            <div class="list1">Today</div>
+            <div class="list2"><span class="iconify" data-icon="fluent:temperature-24-regular" data-width="20" data-height="20"></span>
+                {{ city_weather.max_temp}}<sup>o</sup> / {{ city_weather.min_temp }}<sup>o</sup></div>
+            <div class="list3"><img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" />
+            {{ city_weather.description|lower|capfirst }}</div>
+            <div class="list4"><span class="iconify" data-icon="bi:wind" data-width="20" data-height="20"></span>
+            <p>{{ city_weather.winddir }} {{ city_weather.windspeed }} m/s</p></div>
+            <div class="list5"><span class="iconify" data-icon="akar-icons:triangle-down" data-width="20" data-height="20"></span></div>
+        </div>
+    </a>
+    <div class="content" id="today">
+        <div class="sec2">
+            <div class="card21">
+                <p>Feels like<br><span>{{ city_weather.feels_like }}<sup>o</sup></span></p>
+            </div>
+            <div class="card22">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="lucide:sunrise" data-width="20" data-height="20"></span>
+                            {{ city_weather.sunrise }} </td>
+                        <td><span class="iconify" data-icon="lucide:sunset" data-width="20" data-height="20"></span>
+                            {{ city_weather.sunset }} </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="sec3">
+            <div class="card23">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="fluent:text-description-24-filled" data-width="20"
+                                data-height="20"></span> Description</td>
+                        <td>{{ city_weather.description|lower|capfirst }}</td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:temperature-max" data-width="20"
+                                data-height="20"></span> Max. Temp.
+                        </td>
+                        <td>{{ city_weather.max_temp }}<sup>o</sup></td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:temperature-min" data-width="20"
+                                data-height="20"></span> Min. Temp.
+                        </td>
+                        <td>{{ city_weather.min_temp }}<sup>o</sup></td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:dew-point" data-width="20" data-height="20"></span>
+                            Dew
+                            point</td>
+                        <td>{{ city_weather.dew }}<sup>o</sup></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="card24">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="bi:wind" data-width="20" data-height="20"></span> Wind
+                        </td>
+                        <td>{{ city_weather.winddir }} {{ city_weather.windspeed }} m/s</td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:humidity" data-width="20" data-height="20"></span>
+                            Humidity</td>
+                        <td>{{ city_weather.humidity }}%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:pressure" data-width="20" data-height="20"></span>
+                            Pressure</td>
+                        <td>{{ city_weather.pressure }} hPa</td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:uv-index-alt" data-width="20"
+                                data-height="20"></span>
+                            UV Index</td>
+                        <td>{{ city_weather.uvi }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="sec4">
+            <div class="daycard">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="vaadin:morning" data-width="25" data-height="25"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Morning</td>
+                    </tr>
+                    <tr>
+                        <td>{{ city_weather.morning }}<sup>o</sup></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="daycard">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="eva:sun-fill" data-width="25" data-height="25"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Afternoon</td>
+                    </tr>
+                    <tr>
+                        <td>{{ city_weather.day }}<sup>o</sup></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="daycard">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="uil:sunset" data-width="25" data-height="25"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Evening</td>
+                    </tr>
+                    <tr>
+                        <td>{{ city_weather.eve }}<sup>o</sup></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="daycard">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:haze-night" data-width="25" data-height="25"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Night</td>
+                    </tr>
+                    <tr>
+                        <td>{{ city_weather.night }}<sup>o</sup></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tomorrow -->
+    <a class="collapsible" onclick="showTomorrow()" href="#tomorrow_card">
+        <div class="list" id="tomorrow_card">
+            <div class="list1">{{ forecast1.time }}</div>
+            <div class="list2"><span class="iconify" data-icon="fluent:temperature-24-regular" data-width="20" data-height="20"></span>
+                {{ forecast1.max}}<sup>o</sup> / {{ forecast1.min }}<sup>o</sup></div>
+            <div class="list3"><img src="http://openweathermap.org/img/w/{{ forecast1.icon }}.png" />
+            {{ forecast1.desc|lower|capfirst }}</div>
+            <div class="list4"><span class="iconify" data-icon="bi:wind" data-width="20" data-height="20"></span>
+            <p>{{ forecast1.winddir }} {{ forecast1.windspeed }} m/s</p></div>
+            <div class="list5"><span class="iconify" data-icon="akar-icons:triangle-down" data-width="20" data-height="20"></span></div>
+        </div>
+    </a>
+    <div class="content" id="tomorrow">
+        <div class="sec2">
+            <div class="card21">
+                <p>Avg. Temperature<br><span>{{ forecast1.tempday }}<sup>o</sup></span></p>
+            </div>
+            <div class="card22">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="lucide:sunrise" data-width="20" data-height="20"></span>
+                            {{ forecast1.sunrise }} </td>
+                        <td><span class="iconify" data-icon="lucide:sunset" data-width="20" data-height="20"></span>
+                            {{ forecast1.sunset }} </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="sec3">
+            <div class="card23">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="fluent:text-description-24-filled" data-width="20"
+                                data-height="20"></span> Description</td>
+                        <td>{{ forecast1.desc|lower|capfirst }}</td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:temperature-max" data-width="20"
+                                data-height="20"></span> Max. Temp.
+                        </td>
+                        <td>{{ forecast1.max }}<sup>o</sup></td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:temperature-min" data-width="20"
+                                data-height="20"></span> Min. Temp.
+                        </td>
+                        <td>{{ forecast1.min }}<sup>o</sup></td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:dew-point" data-width="20" data-height="20"></span>
+                            Dew
+                            point</td>
+                        <td>{{ forecast1.dew }}<sup>o</sup></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="card24">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="bi:wind" data-width="20" data-height="20"></span> Wind
+                        </td>
+                        <td>{{ forecast1.winddir }} {{ forecast1.windspeed }} m/s</td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:humidity" data-width="20" data-height="20"></span>
+                            Humidity</td>
+                        <td>{{ forecast1.humidity }}%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:pressure" data-width="20" data-height="20"></span>
+                            Pressure</td>
+                        <td>{{ forecast1.pressure }} hPa</td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:uv-index-alt" data-width="20"
+                                data-height="20"></span>
+                            UV Index</td>
+                        <td>{{ forecast1.uvi }} </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="sec4">
+            <div class="daycard">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="vaadin:morning" data-width="25" data-height="25"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Morning</td>
+                    </tr>
+                    <tr>
+                        <td>{{ forecast1.tempmorn }}<sup>o</sup></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="daycard">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="eva:sun-fill" data-width="25" data-height="25"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Afternoon</td>
+                    </tr>
+                    <tr>
+                        <td>{{ forecast1.tempday }}<sup>o</sup></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="daycard">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="uil:sunset" data-width="25" data-height="25"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Evening</td>
+                    </tr>
+                    <tr>
+                        <td>{{ forecast1.tempeve }}<sup>o</sup></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="daycard">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:haze-night" data-width="25" data-height="25"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Night</td>
+                    </tr>
+                    <tr>
+                        <td>{{ forecast1.tempnight }}<sup>o</sup></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--</div>-->
+
+    <!-- Day3 -->
+    <a class="collapsible" onclick="showDay3()" href="#day3_card">
+        <div class="list" id="day3_card">
+            <div class="list1">{{ forecast2.time }}</div>
+            <div class="list2"><span class="iconify" data-icon="fluent:temperature-24-regular" data-width="20" data-height="20"></span>
+                {{ forecast2.max}}<sup>o</sup> / {{ forecast2.min }}<sup>o</sup></div>
+            <div class="list3"><img src="http://openweathermap.org/img/w/{{ forecast2.icon }}.png" />
+            {{ forecast2.desc|lower|capfirst }}</div>
+            <div class="list4"><span class="iconify" data-icon="bi:wind" data-width="20" data-height="20"></span>
+            <p>{{ forecast2.winddir }} {{ forecast2.windspeed }} m/s</p></div>
+            <div class="list5"><span class="iconify" data-icon="akar-icons:triangle-down" data-width="20" data-height="20"></span></div>
+        </div>
+    </a>
+    <div class="content" id="day3">
+
+        <div class="sec2">
+            <div class="card21">
+                <p>Avg. Temperature<br><span>{{ forecast2.tempday }}<sup>o</sup></span></p>
+            </div>
+            <div class="card22">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="lucide:sunrise" data-width="20" data-height="20"></span>
+                            {{ forecast2.sunrise }} </td>
+                        <td><span class="iconify" data-icon="lucide:sunset" data-width="20" data-height="20"></span>
+                            {{ forecast2.sunset }} </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="sec3">
+            <div class="card23">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="fluent:text-description-24-filled" data-width="20"
+                                data-height="20"></span> Description</td>
+                        <td>{{ forecast2.desc|lower|capfirst }}</td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:temperature-max" data-width="20"
+                                data-height="20"></span> Max. Temp.
+                        </td>
+                        <td>{{ forecast2.max }}<sup>o</sup></td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:temperature-min" data-width="20"
+                                data-height="20"></span> Min. Temp.
+                        </td>
+                        <td>{{ forecast2.min }}<sup>o</sup></td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:dew-point" data-width="20" data-height="20"></span>
+                            Dew
+                            point</td>
+                        <td>{{ forecast2.dew }}<sup>o</sup></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="card24">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="bi:wind" data-width="20" data-height="20"></span> Wind
+                        </td>
+                        <td>{{ forecast2.winddir }} {{ forecast2.windspeed }} m/s</td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:humidity" data-width="20" data-height="20"></span>
+                            Humidity</td>
+                        <td>{{ forecast2.humidity }}%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:pressure" data-width="20" data-height="20"></span>
+                            Pressure</td>
+                        <td>{{ forecast2.pressure }} hPa</td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:uv-index-alt" data-width="20"
+                                data-height="20"></span>
+                            UV Index</td>
+                        <td>{{ forecast2.uvi }} </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="sec4">
+            <div class="daycard">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="vaadin:morning" data-width="25" data-height="25"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Morning</td>
+                    </tr>
+                    <tr>
+                        <td>{{ forecast2.tempmorn }}<sup>o</sup></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="daycard">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="eva:sun-fill" data-width="25" data-height="25"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Afternoon</td>
+                    </tr>
+                    <tr>
+                        <td>{{ forecast2.tempday }}<sup>o</sup></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="daycard">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="uil:sunset" data-width="25" data-height="25"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Evening</td>
+                    </tr>
+                    <tr>
+                        <td>{{ forecast2.tempeve }}<sup>o</sup></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="daycard">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:haze-night" data-width="25" data-height="25"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Night</td>
+                    </tr>
+                    <tr>
+                        <td>{{ forecast2.tempnight }}<sup>o</sup></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <a class="collapsible" onclick="showDay4()" href="#day4_card">
+        <div class="list" id="day4_card">
+            <div class="list1">{{ forecast3.time }}</div>
+            <div class="list2"><span class="iconify" data-icon="fluent:temperature-24-regular" data-width="20" data-height="20"></span>
+                {{ forecast3.max}}<sup>o</sup> / {{ forecast3.min }}<sup>o</sup></div>
+            <div class="list3"><img src="http://openweathermap.org/img/w/{{ forecast3.icon }}.png" />
+            {{ forecast3.desc|lower|capfirst }}</div>
+            <div class="list4"><span class="iconify" data-icon="bi:wind" data-width="20" data-height="20"></span>
+            <p>{{ forecast3.winddir }} {{ forecast3.windspeed }} m/s</p></div>
+            <div class="list5"><span class="iconify right" data-icon="akar-icons:triangle-down" data-width="20" data-height="20"></span></div>
+        </div>
+    </a>
+    <div class="content" id="day4">
+        <div class="sec2">
+            <div class="card21">
+                <p>Avg. Temperature<br><span>{{ forecast3.tempday }}<sup>o</sup></span></p>
+            </div>
+            <div class="card22">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="lucide:sunrise" data-width="20" data-height="20"></span>
+                            {{ forecast3.sunrise }} </td>
+                        <td><span class="iconify" data-icon="lucide:sunset" data-width="20" data-height="20"></span>
+                            {{ forecast3.sunset }} </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="sec3">
+            <div class="card23">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="fluent:text-description-24-filled" data-width="20"
+                                data-height="20"></span> Description</td>
+                        <td>{{ forecast3.desc|lower|capfirst }}</td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:temperature-max" data-width="20"
+                                data-height="20"></span> Max. Temp.
+                        </td>
+                        <td>{{ forecast3.max }}<sup>o</sup></td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:temperature-min" data-width="20"
+                                data-height="20"></span> Min. Temp.
+                        </td>
+                        <td>{{ forecast3.min }}<sup>o</sup></td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:dew-point" data-width="20" data-height="20"></span>
+                            Dew
+                            point</td>
+                        <td>{{ forecast3.dew }}<sup>o</sup></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="card24">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="bi:wind" data-width="20" data-height="20"></span> Wind
+                        </td>
+                        <td>{{ forecast3.winddir }} {{ forecast3.windspeed }} m/s</td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:humidity" data-width="20" data-height="20"></span>
+                            Humidity</td>
+                        <td>{{ forecast3.humidity }}%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:pressure" data-width="20" data-height="20"></span>
+                            Pressure</td>
+                        <td>{{ forecast3.pressure }} hPa</td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:uv-index-alt" data-width="20"
+                                data-height="20"></span>
+                            UV Index</td>
+                        <td>{{ forecast3.uvi }} </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="sec4">
+            <div class="daycard">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="vaadin:morning" data-width="25" data-height="25"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Morning</td>
+                    </tr>
+                    <tr>
+                        <td>{{ forecast3.tempmorn }}<sup>o</sup></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="daycard">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="eva:sun-fill" data-width="25" data-height="25"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Afternoon</td>
+                    </tr>
+                    <tr>
+                        <td>{{ forecast3.tempday }}<sup>o</sup></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="daycard">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="uil:sunset" data-width="25" data-height="25"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Evening</td>
+                    </tr>
+                    <tr>
+                        <td>{{ forecast3.tempeve }}<sup>o</sup></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="daycard">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:haze-night" data-width="25" data-height="25"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Night</td>
+                    </tr>
+                    <tr>
+                        <td>{{ forecast3.tempnight }}<sup>o</sup></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Day5 -->
+    <a class="collapsible" onclick="showDay5()" href="#day5_card">
+        <div class="list" id="day5_card">
+            <div class="list1">{{ forecast4.time }}</div>
+            <div class="list2"><span class="iconify" data-icon="fluent:temperature-24-regular" data-width="20" data-height="20"></span>
+                {{ forecast4.max}}<sup>o</sup> / {{ forecast4.min }}<sup>o</sup></div>
+            <div class="list3"><img src="http://openweathermap.org/img/w/{{ forecast4.icon }}.png" />
+            {{ forecast4.desc|lower|capfirst }}</div>
+            <div class="list4"><span class="iconify" data-icon="bi:wind" data-width="20" data-height="20"></span>
+            <p>{{ forecast4.winddir }} {{ forecast4.windspeed }} m/s</p></div>
+            <div class="list5"><span class="iconify" data-icon="akar-icons:triangle-down" data-width="20" data-height="20"></span></div>
+        </div>
+    </a>
+    <div class="content" id="day5">
+
+        <div class="sec2">
+            <div class="card21">
+                <p>Avg. Temperature<br><span>{{ forecast4.tempday }}<sup>o</sup></span></p>
+            </div>
+            <div class="card22">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="lucide:sunrise" data-width="20" data-height="20"></span>
+                            {{ forecast4.sunrise }} </td>
+                        <td><span class="iconify" data-icon="lucide:sunset" data-width="20" data-height="20"></span>
+                            {{ forecast4.sunset }} </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="sec3">
+            <div class="card23">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="fluent:text-description-24-filled" data-width="20"
+                                data-height="20"></span> Description</td>
+                        <td>{{ forecast4.desc|lower|capfirst }}</td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:temperature-max" data-width="20"
+                                data-height="20"></span> Max. Temp.
+                        </td>
+                        <td>{{ forecast4.max }}<sup>o</sup></td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:temperature-min" data-width="20"
+                                data-height="20"></span> Min. Temp.
+                        </td>
+                        <td>{{ forecast4.min }}<sup>o</sup></td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:dew-point" data-width="20" data-height="20"></span>
+                            Dew
+                            point</td>
+                        <td>{{ forecast4.dew }}<sup>o</sup></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="card24">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="bi:wind" data-width="20" data-height="20"></span> Wind
+                        </td>
+                        <td>{{ forecast4.winddir }} {{ forecast4.windspeed }} m/s</td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:humidity" data-width="20" data-height="20"></span>
+                            Humidity</td>
+                        <td>{{ forecast4.humidity }}%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:pressure" data-width="20" data-height="20"></span>
+                            Pressure</td>
+                        <td>{{ forecast4.pressure }} hPa</td>
+                    </tr>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:uv-index-alt" data-width="20"
+                                data-height="20"></span>
+                            UV Index</td>
+                        <td>{{ forecast4.uvi }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="sec4">
+            <div class="daycard">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="vaadin:morning" data-width="25" data-height="25"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Morning</td>
+                    </tr>
+                    <tr>
+                        <td>{{ forecast4.tempmorn }}<sup>o</sup></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="daycard">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="eva:sun-fill" data-width="25" data-height="25"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Afternoon</td>
+                    </tr>
+                    <tr>
+                        <td>{{ forecast4.tempday }}<sup>o</sup></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="daycard">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="uil:sunset" data-width="25" data-height="25"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Evening</td>
+                    </tr>
+                    <tr>
+                        <td>{{ forecast4.tempeve }}<sup>o</sup></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="daycard">
+                <table>
+                    <tr>
+                        <td><span class="iconify" data-icon="carbon:haze-night" data-width="25" data-height="25"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Night</td>
+                    </tr>
+                    <tr>
+                        <td>{{ forecast4.tempnight }}<sup>o</sup></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <span>
+        Created by : <a href="https://atulmanjhi-portfolio.herokuapp.com/" target="_blank">Atul Kumar Manjhi</a> |
+    </span>
+    {% load static %}
+    <span>
+        Powered by: <a href="https://openweathermap.org/" target="_blank"><img src="{% static 'logo.png' %}" height="40"
+            width="90"></a>
+    </span>
+</footer>
+
+{% endblock %}

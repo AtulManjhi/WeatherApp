@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+
+{% block body %}
+
+
+<div class="error">
+    Oops!<br>
+    <span class="iconify" data-icon="bi:emoji-dizzy" data-width="30" data-height="30"></span><br>
+    Something went wrong.<br>
+    Please try with a different city name.
+</div>
+
+<footer style="position: fixed;">
+    <span>
+        Created by : <a href="https://atulmanjhi-portfolio.herokuapp.com/" target="_blank">Atul Kumar Manjhi</a> |
+    </span>
+    {% load static %}
+    <span>
+        Powered by: <a href="https://openweathermap.org/" target="_blank"><img src="{% static 'logo.png' %}" height="40"
+                width="90"></a>
+    </span>
+</footer>
+{% endblock %}

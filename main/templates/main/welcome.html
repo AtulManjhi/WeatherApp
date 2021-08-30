@@ -1,0 +1,19 @@
+{% extends 'main/base.html' %}
+
+{% block body %}
+<div id="removeable_div">
+    {% load static %}
+    <img src="{% static 'animated.gif' %}">
+</div>
+
+<footer>
+    <span>
+        Created by : <a href="https://atulmanjhi-portfolio.herokuapp.com/" target="_blank">Atul Kumar Manjhi</a> |
+    </span>
+    {% load static %}
+    <span>
+        Powered by: <a href="https://openweathermap.org/" target="_blank"><img src="{% static 'logo.png' %}" height="40"
+            width="90"></a>
+    </span>
+</footer>
+{% endblock %}

@@ -1,0 +1,232 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Weather Forecast</title>
+  <link rel="icon" href="{% static 'icon.png' %}" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&family=Poppins:wght@200&display=swap"
+    rel="stylesheet">
+  <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  {% block head %} {% endblock %}
+</head>
+
+<body>
+  <div class="nav">
+    <img src="{% static 'icon.png' %}" height=40 width=40 />
+    <h1>Weather Forecast</h1>
+  </div>
+  <form method="GET" class="form">
+    <input type="search" id="city" name="city" placeholder="Enter City Name" list="cities" required />
+    <datalist id="cities">
+      {% for i in cities %}
+        <option value="{{ i }}">
+      {% endfor %}
+    </datalist>
+    <button type="submit"><span class="iconify" data-icon="bx:bx-search-alt-2" data-width="25"
+        data-height="25"></span></button>
+    </form>
+
+  {% block body %} {% endblock %}
+  
+  <script>
+    function showToday() {
+      var content = document.getElementById('today');
+      if (content.style.height == "fit-content") {
+        content.style.height = "0";
+      }
+      else {
+        content.style.height = "fit-content";
+      }
+      document.getElementById('tomorrow').style.height = "0";
+      document.getElementById('day3').style.height = "0";
+      document.getElementById('day4').style.height = "0";
+      document.getElementById('day5').style.height = "0";
+      document.getElementById('tomorrow').style.opacity = 0;
+      document.getElementById('day3').style.opacity = 0;
+      document.getElementById('day4').style.opacity = 0;
+      document.getElementById('day5').style.opacity = 0;
+      if (content.style.opacity == 0) {
+        content.style.opacity = 1;
+      }
+      else {
+        content.style.opacity = 0;
+      }
+    }
+
+    function openToday() {
+      var content = document.getElementById('today');
+      document.getElementById('today').style.height = "fit-content";
+      document.getElementById('tomorrow').style.height = "0";
+      document.getElementById('day3').style.height = "0";
+      document.getElementById('day4').style.height = "0";
+      document.getElementById('day5').style.height = "0";
+      document.getElementById('tomorrow').style.opacity = 0;
+      document.getElementById('day3').style.opacity = 0;
+      document.getElementById('day4').style.opacity = 0;
+      document.getElementById('day5').style.opacity = 0;
+      content.style.opacity = 1;
+    }
+
+    function showTomorrow() {
+      var content = document.getElementById('tomorrow');
+      if (content.style.height == "fit-content") {
+        content.style.height = "0";
+      }
+      else {
+        content.style.height = "fit-content";
+      }
+      document.getElementById('today').style.height = "0";
+      document.getElementById('day3').style.height = "0";
+      document.getElementById('day4').style.height = "0";
+      document.getElementById('day5').style.height = "0";
+      document.getElementById('day5').style.opacity = 0;
+      document.getElementById('today').style.opacity = 0;
+      document.getElementById('day3').style.opacity = 0;
+      document.getElementById('day4').style.opacity = 0;
+      if (content.style.opacity == 0) {
+        content.style.opacity = 1;
+      }
+      else {
+        content.style.opacity = 0;
+      }
+    }
+
+    function openTomorrow() {
+      var content = document.getElementById('tomorrow');
+      document.getElementById('today').style.height = "0";
+      document.getElementById('tomorrow').style.height = "fit-content";
+      document.getElementById('day3').style.height = "0";
+      document.getElementById('day4').style.height = "0";
+      document.getElementById('day5').style.height = "0";
+      document.getElementById('day5').style.opacity = 0;
+      document.getElementById('today').style.opacity = 0;
+      document.getElementById('day3').style.opacity = 0;
+      document.getElementById('day4').style.opacity = 0;
+      content.style.opacity = 1;
+    
+    }
+
+    function showDay3() {
+      var content = document.getElementById('day3');
+      if (content.style.height == "fit-content") {
+        content.style.height = "0";
+      }
+      else {
+        content.style.height = "fit-content";
+      }
+      document.getElementById('tomorrow').style.height = "0";
+      document.getElementById('today').style.height = "0";
+      document.getElementById('day4').style.height = "0";
+      document.getElementById('day5').style.height = "0";
+      document.getElementById('tomorrow').style.opacity = 0;
+      document.getElementById('today').style.opacity = 0;
+      document.getElementById('day4').style.opacity = 0;
+      document.getElementById('day5').style.opacity = 0;
+      if (content.style.opacity == 0) {
+        content.style.opacity = 1;
+      }
+      else {
+        content.style.opacity = 0;
+      }
+    }
+    function openDay3() {
+      var content = document.getElementById('day3');
+      document.getElementById('day3').style.height = "fit-content";
+      document.getElementById('tomorrow').style.height = "0";
+      document.getElementById('today').style.height = "0";
+      document.getElementById('day4').style.height = "0";
+      document.getElementById('day5').style.height = "0";
+      document.getElementById('tomorrow').style.opacity = 0;
+      document.getElementById('today').style.opacity = 0;
+      document.getElementById('day4').style.opacity = 0;
+      document.getElementById('day5').style.opacity = 0;
+      content.style.opacity = 1;
+    }
+
+    function showDay4() {
+      var content = document.getElementById('day4');
+      if (content.style.height == "fit-content") {
+        content.style.height = "0";
+      }
+      else {
+        content.style.height = "fit-content";
+      }
+      document.getElementById('tomorrow').style.height = "0";
+      document.getElementById('today').style.height = "0";
+      document.getElementById('day3').style.height = "0";
+      document.getElementById('day5').style.height = "0";
+      document.getElementById('tomorrow').style.opacity = 0;
+      document.getElementById('today').style.opacity = 0;
+      document.getElementById('day3').style.opacity = 0;
+      document.getElementById('day5').style.opacity = 0;
+      if (content.style.opacity == 0) {
+        content.style.opacity = 1;
+      }
+      else {
+        content.style.opacity = 0;
+      }
+    }
+    function openDay4() {
+      var content = document.getElementById('day4');
+      document.getElementById('day4').style.height = "fit-content";
+      document.getElementById('tomorrow').style.height = "0";
+      document.getElementById('today').style.height = "0";
+      document.getElementById('day3').style.height = "0";
+      document.getElementById('day5').style.height = "0";
+      document.getElementById('tomorrow').style.opacity = 0;
+      document.getElementById('today').style.opacity = 0;
+      document.getElementById('day3').style.opacity = 0;
+      document.getElementById('day5').style.opacity = 0;
+      content.style.opacity = 1;
+    }
+
+    function showDay5() {
+      var content = document.getElementById('day5');
+      if (content.style.height == "fit-content") {
+        content.style.height = "0";
+      }
+      else {
+        content.style.height = "fit-content";
+      }
+      document.getElementById('tomorrow').style.height = "0";
+      document.getElementById('today').style.height = "0";
+      document.getElementById('day3').style.height = "0";
+      document.getElementById('day4').style.height = "0";
+      document.getElementById('tomorrow').style.opacity = 0;
+      document.getElementById('today').style.opacity = 0;
+      document.getElementById('day3').style.opacity = 0;
+      document.getElementById('day4').style.opacity = 0;
+      if (content.style.opacity == 0) {
+        content.style.opacity = 1;
+      }
+      else {
+        content.style.opacity = 0;
+      }
+    }
+    function openDay5() {
+      var content = document.getElementById('day5');
+      document.getElementById('day5').style.height = "fit-content";
+      document.getElementById('tomorrow').style.height = "0";
+      document.getElementById('today').style.height = "0";
+      document.getElementById('day3').style.height = "0";
+      document.getElementById('day4').style.height = "0";
+      
+      document.getElementById('tomorrow').style.opacity = 0;
+      document.getElementById('today').style.opacity = 0;
+      document.getElementById('day3').style.opacity = 0;
+      document.getElementById('day4').style.opacity = 0;
+      content.style.opacity = 1;
+    }
+  </script>
+
+</body>
+
+</html>

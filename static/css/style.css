@@ -1,0 +1,497 @@
+*{
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    font-family: 'Hind Siliguri', sans-serif;
+}
+
+body{
+    background-image: url("/static/bkg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+#removeable_div{
+    height: 350px;
+    border-radius: 4px;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgba(1, 1, 1, 0.8);
+    margin: 0px 20px;
+    margin-top: 30px;
+}
+
+#removeable_div img{
+    height: 100%;
+    width: 100%;
+    border-radius: 4px;
+}
+
+.error{
+    text-align: center;
+    background-color: coral;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    font-size: 1.2rem;
+    margin: 0px 120px;
+    margin-top: 50px;
+    border-radius: 4px;
+}
+
+.nav {
+    background-color: none;
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.nav img{
+    padding-left: 20px;
+}
+h1{
+    color: #f1f1f1;
+    margin-left: 5px;
+}
+.form {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+#city{
+    width: 350px;
+    font-size: 1.1rem;
+    border: 2px solid grey;
+    padding: 6px 5px 6px 10px;
+    
+}
+.form button{
+    width: 45px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-left: 10px;
+    border: 2px solid grey;
+    padding-top: 7px;
+    background-color: #c2d6d6;
+}
+.form button:hover{
+    background-color: #b3cccc;
+}
+
+@media screen and (max-width: 450px) {
+    #city{
+        width: 200px;
+    }
+
+}
+
+.card1{
+    height: fit-content;
+    border-radius: 4px;
+    position: relative;
+    padding: 10px 40px;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgba(51, 102, 153,0.7);
+    margin: 0px 120px;
+    margin-top: 20px;
+}
+
+.card1 .col1{
+    width: 65%;
+    display: flexbox;
+    color: white;
+}
+
+.card1 .col2{
+    width: 35%;
+    text-align: center;
+    color: white;
+    display: flexbox;
+}
+table{
+    color: white;
+}
+
+.city{
+    margin-top: 10px;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.icon{
+    margin-top: 30px;
+    background: none;
+}
+
+.feelsLike{
+    margin-top: 15px;
+    font-size: 1.2rem;
+}
+
+.desc{
+    font-weight: 600;
+    font-size: 2rem;
+}
+.temp{
+    font-size: 2.3rem;
+    margin-top: 17px;
+    font-weight: 600;
+}
+.max_min {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.card2{
+    height: fit-content;
+    border-radius: 4px;
+    position: relative;
+    padding: 10px 40px;
+    box-sizing: border-box;
+    display: flexbox;
+    background-color: rgba(255, 255, 255,0.9);
+    margin: 10px 120px;
+}
+.collapsible {
+    display: block;
+    text-decoration: none;
+    color: black;
+    width: 100%;
+    cursor: pointer;
+    text-align: left;
+    font-size: 1.1rem;
+    height: fit-content;
+    position: relative;
+    background-color: #fff;
+    box-sizing: border-box;
+  }
+  
+.content {
+    display: block;
+    overflow: hidden;
+    background-color: #fff;
+    height: fit-content;
+    border-radius: 0px;
+    padding: 10px 40px;
+    height: 0;
+    opacity: 0;
+    border-top: 1px solid gray;
+    -webkit-transition: all 0.7s ease-in-out;
+    -moz-transition: all 0.7s ease-in-out;
+    -ms-transition: all 0.7s ease-in-out;
+    -o-transition: all 0.7s ease-in-out;
+    transition: all 0.7s ease-in-out;
+}
+.content:target {
+    height: fit-content;
+    color: black;
+}
+
+.fiveDay_head{
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.fiveDay_time{
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+.sec1{
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    font-size: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+}
+
+.dailyHead{
+    font-weight: 600;
+}
+.sec2{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: fit-content;
+    margin: 10px;
+}
+.card21{
+    width: 50%;
+    font-size: 1.2rem;
+}
+
+.card21 p span{
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.card22{
+    width: 50%;
+}
+.card22 table{
+    font-size: 1.2rem;
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+    color: black;
+}
+
+.sec3{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: fit-content;
+    margin: 10px;
+    font-size: 1.2rem;
+    padding-bottom: 10px;
+}
+.card23{
+    width: 50%;
+}
+
+.card24{
+    width: 50%;
+}
+
+.card23 table{
+    color: black;
+    width: 100%;
+    padding-right: 15px;
+}
+.card23 table td{
+    border-bottom: 1px solid #222;
+    width: 45%;
+    padding-top: 10px;
+}
+.card24 table{
+    color: black;
+    width: 100%;
+    padding-left: 15px;
+}
+.card24 table td{
+    border-bottom: 1px solid #222;
+    width: 45%;
+    padding-top: 10px;
+}
+.sec4{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+.daycard{
+    width: 18%;
+    margin: 3px 5px;
+    background-color: #f4f4f4;
+    text-align: center;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: rgba(255, 255, 255,0.7);
+}
+
+.daycard table{
+    width: 100%;
+    color: black;
+    font-size: 1.2rem;
+}
+
+@media screen and (max-width: 855px) {
+    .sec2{
+        align-items: center;
+        justify-content: center;
+        margin-left: 0;
+        padding-left: 0;
+    }
+    
+    .sec3{
+        align-items: center;
+        justify-content: center;
+        padding-top: 15px;
+        margin-left: 0;
+        padding-left: 0;
+    }
+
+    .card21, .card22, .card23, .card24{
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .card21, .card22{
+        text-align: center;
+    }
+    .card23 table, .card24 table{
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+@media screen and (max-width: 600px) {
+    .card21, .card22, .card23, .card24{
+        font-size: 1.1rem;
+    }
+    .sec4{
+        margin: 0;
+        padding: 0;
+    }
+    .error{
+        margin: 20px;
+    }
+}
+
+@media screen and (max-width: 690px) {
+    .daycard{
+        width: 100%;
+    }
+ }
+
+ 
+@media screen and (max-width: 500px) {
+    .content{
+        padding: 10px 10px;
+    }
+    .card2{
+        padding: 10px 10px;
+    }
+}
+.dailycard{
+    width: 140px;
+    margin: 3px 3px;
+    background-color: #f4f4f4;
+    text-align: center;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: rgba(255, 255, 255,0.7);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.dailycard table{
+    width: 100%;
+    color: black;
+    font-size: 1.2rem;
+}
+@media screen and (max-width: 520px) {
+   .dailycard{
+       width: 200px;
+   }
+}
+
+.list{
+    margin-top: 5px;
+    padding: 20px 10px;
+    width: 100%;
+    display: flex;
+}
+.list1{
+    width: 20%;
+}
+.list2{
+    width: 20%;
+}
+
+.list3{
+    width: 30%;
+    display: flex;
+}
+.list img{
+    height: 35px;
+    width: auto;
+}
+
+.list4{
+    display: flex;
+    width: 20%;
+}
+.list4 p{
+    margin-left: 5px;
+}
+.list5{
+    width: 10%;
+}
+
+@media screen and (max-width: 900px) {
+    .list2, .list4{
+        display: none;
+    }   
+    .list1{
+        width: 35%;
+        font-size: 1.1rem;
+    }
+    .list3{
+        width: 55%;
+        font-size: 1.1rem;
+    }
+}
+
+footer{
+    background-color: #f2f2f2;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    color:black;
+    position: relative;
+    bottom: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+footer a{
+    color: crimson;
+    text-decoration: none;
+    cursor: pointer;
+    margin-right: 10px;
+}
+footer span img{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+footer span{
+    line-height: 80px;
+    margin-left: 10px;
+}
+
+@media screen and (max-width: 980px) {
+    .card1, .card2{
+        margin: 10px 60px;
+    }    
+}
+@media screen and (max-width: 750px) {
+    .card1 .col1{
+        width: 100%;
+        text-align: center;
+    }    
+    .card1 .col2{
+        width: 100%;
+    }
+    .nav{
+        align-items: center;
+        justify-content: center;
+    }
+}
+@media screen and (max-width: 650px) {
+    .card1, .card2{
+        margin: 10px 20px;
+    }
+}
