@@ -27,6 +27,10 @@ body{
     margin-top: 30px;
 }
 
+datalist{
+    overflow: hidden;
+}
+
 #removeable_div img{
     height: 100%;
     width: 100%;
