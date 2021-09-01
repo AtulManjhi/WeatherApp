@@ -2,19 +2,11 @@ from django.shortcuts import render
 import requests
 import datetime
 import pytz
-import pandas
 
 # Create your views here.
+
 def index(request):
-    df = pandas.read_json("city.json")
-    cities = []
-    for i in df['name']:
-        cities.append(i)
-    cities.sort()
-    context = {
-        "cities" : cities,
-    }
-    
+    context = {}
     url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=891d4796401bf294076309e0a682430b'
     url2 = 'https://api.openweathermap.org/data/2.5/onecall?lat={}&lon={}&exclude=minutely&units=metric&appid=891d4796401bf294076309e0a682430b'
 
