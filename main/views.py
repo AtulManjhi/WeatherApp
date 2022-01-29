@@ -7,8 +7,8 @@ import pytz
 
 def index(request):
     context = {}
-    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=891d4796401bf294076309e0a682430b'
-    url2 = 'https://api.openweathermap.org/data/2.5/onecall?lat={}&lon={}&exclude=minutely&units=metric&appid=891d4796401bf294076309e0a682430b'
+    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=your-id'
+    url2 = 'https://api.openweathermap.org/data/2.5/onecall?lat={}&lon={}&exclude=minutely&units=metric&appid=your-id'
 
     if request.GET.get('city'):
         city = request.GET.get('city')
